@@ -28,7 +28,18 @@ const getDetail = (id) => {
 
 }
 
+const newBlog = (blogData = {}) => {
+	return {
+		id: 3,
+		author: "三联周刊",
+		title: "直播卖货，罗永浩的抖音野望",
+		content: "直播卖货，罗永浩的抖音野望的内容",
+		createTime: 1546610491112
+	}
+}
+
 module.exports = {
 	getList,
-	getDetail
+	getDetail,
+	newBlog
 };
