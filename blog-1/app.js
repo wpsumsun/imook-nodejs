@@ -43,7 +43,9 @@ const serverHandle = (req, res) => {
 		// 处理blog的路由
 		const blogData = handleBlogRouter(req, res);
 		if (blogData) {
-			return JSON.stringify(blogData.data);
+			res.end(
+				JSON.stringify(blogData.data)
+			)
 		}
 		// 处理用户的路由
 		const userData = handleUserRouter(req, res);
@@ -54,6 +56,7 @@ const serverHandle = (req, res) => {
 			return
 		}
 	})
+
 	res.end()
 }
 module.exports = serverHandle;
