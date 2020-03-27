@@ -6,7 +6,6 @@ const getPostData = (req) => {
 			resolve({});
 			return;
 		}
-
 		if (req.headers['content-type'] !== 'application/json') {
 			resolve({});
 			return;
@@ -41,12 +40,17 @@ const serverHandle = (req, res) => {
 	getPostData(req).then((postData) => {
 		req.body = postData;
 		// 处理blog的路由
-		const blogData = handleBlogRouter(req, res);
-		if (blogData) {
-			res.end(
-				JSON.stringify(blogData.data)
-			)
+		const blogResult = handleBlogRouter(req, res);
+		if (blogResult) {
+			blogResult.then(blogData => {
+				res.end(
+					JSON.stringify(blogData.data)
+				)
+			})
+			return
 		}
+
+
 		// 处理用户的路由
 		const userData = handleUserRouter(req, res);
 		if (userData) {

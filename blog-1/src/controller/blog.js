@@ -1,20 +1,21 @@
+const { exec } = require('../db/mysql');
+
 const getList = (author, keyword) => {
-	return [
-		{
-			id: 1,
-			author: "达达前端",
-			title: "前端css基础知识",
-			content: "前端css基础知识的内容",
-			createTime: 1546610491112,
-		},
-		{
-			id: 2,
-			author: "虎嗅APP",
-			title: "如何评价美国两万亿救市计划",
-			content: "如何评价美国两万亿救市计的内容",
-			createTime: 1546610491373,
-		}
-	]
+	const sql = `select * from blogs where 1=1 `;
+	console.log("author:", author, "keyword:", keyword);
+
+	if (author) {
+		sql += `and author='${author}' `;
+		console.log("sql:", sql);
+	}
+	if (keyword) {
+		sql += `and title like '%${keyword}%' `;
+	}
+	sql += `order by createtime desc`;
+
+	// 返回promise
+	console.log("sql:", sql);
+	return exec(sql);
 }
 
 const getDetail = (id) => {
