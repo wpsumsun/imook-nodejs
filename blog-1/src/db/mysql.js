@@ -4,7 +4,7 @@ const { MYSQL_CONF } = require('../conf/db');
 const con = mysql.createConnection(MYSQL_CONF);
 
 con.connect();
-const sql = 'select * from users;';
+// const sql = 'select * from users;';
 function exec(sql) {
 	const promise = new Promise((resolve, reject) => {
 		con.query(sql, (err, result) => {

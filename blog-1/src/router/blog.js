@@ -11,12 +11,19 @@ const handleBlogRouter = (req, res) => {
 		const keyword = req.query.keyword || '';
 		const result = getList(author, keyword);
 		return result.then((listdata) => {
+			console.log("listdata:", listdata);
 			return new SuccessModel(listdata);
 		})
 	}
 	if (method === "GET" && path === "/api/blog/detail") {
 		const id = req.query.id || '';
-		const detailData = getDetail(id);
+		const result = getDetail(id);
+		return result.then((detailData) => {
+			console.log("detailData:", detailData);
+			return new SuccessModel(detailData);
+		})
+
+
 		return new SuccessModel(detailData);
 	}
 	if (method === "POST" && path === "/api/blog/new") {
