@@ -27,6 +27,8 @@ const getPostData = (req) => {
 	return promise;
 }
 
+const SESSION_DATA = {};
+
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src//router/user');
 const serverHandle = (req, res) => {
@@ -35,8 +37,32 @@ const serverHandle = (req, res) => {
 	const path = req.url.split('?')[0];
 	// 获取query
 	req.query = querystring.parse(req.url.split('?')[1]);
-	// 解析postData
+	// 解析cookie
+	req.cookie = {};
+	const cookieStr = req.headers.cookie || '';
+	cookieStr.split(';').forEach((item) => {
+		if (!item) {
+			return;
+		}
+		const arr = item.split('=');
+		const key = arr[0].trim();
+		const value = arr[1].trim();
+		req.cookie[key] = value;
+	});
+	console.log("req.cookie", req.cookie);
+	// 解析session
+	const userId = req.cookie.userid;
+	if (userId) {
+		if (!SESSION_DATA[userId]) {
+			SESSION_DATA[userId] = {}
+		}
+	} else {
+		userId = `${Date.now()}_${Math.random()}`;
+		SESSION_DATA[userId] = {}
+	}
+	req.session = SESSION_DATA[userId]
 
+	// 解析postData
 	getPostData(req).then((postData) => {
 		req.body = postData;
 		// 处理blog的路由
