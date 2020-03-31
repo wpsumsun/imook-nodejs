@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser'); // cookie  req.cookie
 var logger = require('morgan'); // 日志
+const session = require('express-session');
 
 var blogRouter = require('./routes/blog');
 var userRouter = require('./routes/user');
@@ -13,6 +14,14 @@ app.use(logger('dev'));
 app.use(express.json()); // getPostData 从而可以从req.body中获取post的相关数据
 app.use(express.urlencoded({ extended: false })); // 兼容其他格式
 app.use(cookieParser());
+app.use(session({
+  secret: "this_is_a_secret",
+  cookie: {
+    path: '/', // 默认配置
+    httpOnly: true, // 默认配置
+    maxAge: 24 * 60 * 60 * 1000,
+  }
+}));
 
 app.use('/api/blog', blogRouter);
 app.use('/api/user', userRouter);
