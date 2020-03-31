@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>登录</title>
 </head>
+
 <body>
     <div>
         <label>
-            用户名 <input type="text" id="textUsername"/>
+            用户名 <input type="text" id="textUsername" />
         </label>
         <label>
-            密码 <input type="password" id="textPassword"/>
+            密码 <input type="password" id="textPassword" />
         </label>
         <button id="btnLogin">登录</button>
     </div>
-    
+
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script>
         // 发送 post 请求
         function post(url, data = {}) {
+
             return $.ajax({
                 type: 'post',
                 url,
@@ -32,15 +35,17 @@
         $('#btnLogin').click(() => {
             const username = $('#textUsername').val()
             const password = $('#textPassword').val()
+            console.log("username", username, "password", password);
             const url = '/api/user/login'
             const data = {
                 username,
                 password
             }
             post(url, data).then(res => {
-                if (res.errno === 0) {
+                console.log("res", res)
+                if (res.error === 0) {
                     // 登录成功
-                    location.href = './admin.html'
+                    location.href = '/admin.html'
                 } else {
                     // 登录失败
                     alert(res.message)
@@ -49,4 +54,5 @@
         })
     </script>
 </body>
+
 </html>

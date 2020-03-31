@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,22 +11,27 @@
             margin: 0 20px;
             line-height: 1;
         }
+
         a {
             text-decoration-line: none;
             cursor: pointer;
         }
+
         table {
             border: 1px solid #ccc;
         }
+
         table th {
             text-align: left;
             background-color: #f1f1f1;
-        } 
+        }
+
         table td:nth-child(1) {
             width: 300px;
         }
     </style>
 </head>
+
 <body>
     <h1 style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">管理中心</h1>
     <p>
@@ -87,7 +93,7 @@
 
         // 加载数据
         get(url).then(res => {
-            if (res.errno !== 0) {
+            if (res.error !== 0) {
                 alert('数据错误')
                 return
             }
@@ -127,7 +133,7 @@
             if (confirm('确定删除？')) {
                 const url = '/api/blog/del?id=' + $target.attr('data-id')
                 post(url).then(res => {
-                    if (res.errno !== 0) {
+                    if (res.error !== 0) {
                         alert('操作错误')
                         return
                     }
@@ -138,4 +144,5 @@
 
     </script>
 </body>
+
 </html>

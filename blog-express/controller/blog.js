@@ -27,16 +27,10 @@ const newBlog = (blogData = {}) => {
 	const title = xss(blogData.title)
 	// console.log('title is', title)
 	const content = xss(blogData.content)
-	const author = blogData.author
+	const author = blogData.auther
 	const createTime = Date.now()
-
-	const sql = `
-        insert into blogs (title, content, createtime, author)
-        values ('${title}', '${content}', ${createTime}, '${author}');
-    `
-
+	const sql = `insert into blogs (title, content, createtime, author)values ('${title}', '${content}', ${createTime}, '${author}');`
 	return exec(sql).then(insertData => {
-		// console.log('insertData is ', insertData)
 		return {
 			id: insertData.insertId
 		}

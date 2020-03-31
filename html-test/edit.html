@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +11,26 @@
             margin: 0 20px;
             line-height: 1;
         }
+
         a {
             text-decoration-line: none;
         }
+
         .title-wrapper {
             margin-bottom: 10px;
         }
+
         .title-wrapper input {
             width: 300px;
         }
+
         .content-wrapper textarea {
             width: 300px;
             height: 150px;
         }
     </style>
 </head>
+
 <body>
     <h1 style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">编辑博客</h1>
     <div>
@@ -79,7 +85,7 @@
         const urlParams = getUrlParams()
         const url = '/api/blog/detail?id=' + urlParams.id
         get(url).then(res => {
-            if (res.errno !== 0) {
+            if (res.error !== 0) {
                 alert('操作错误')
                 return
             }
@@ -104,7 +110,7 @@
                 content
             }
             post(url, data).then(res => {
-                if (res.errno !== 0) {
+                if (res.error !== 0) {
                     alert('操作错误')
                     return
                 }
@@ -115,4 +121,5 @@
 
     </script>
 </body>
+
 </html>

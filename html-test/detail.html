@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             margin: 0 20px;
             line-height: 1;
         }
+
         a {
             text-decoration-line: none;
         }
@@ -18,17 +20,20 @@
             font-size: 20px;
             font-weight: bold;
         }
+
         .info-container span,
         .info-container a {
             font-size: 14px;
             color: #999;
         }
+
         .content-wrapper {
             margin-top: 20px;
             border-top: 1px solid #ccc;
         }
     </style>
 </head>
+
 <body>
     <h1 id="title" class="title"></h1>
     <div id="info-container" class="info-container"></div>
@@ -73,7 +78,7 @@
         const urlParams = getUrlParams()
         const url = '/api/blog/detail?id=' + urlParams.id
         get(url).then(res => {
-            if (res.errno !== 0) {
+            if (res.error !== 0) {
                 alert('数据错误')
                 return
             }
@@ -91,4 +96,5 @@
         })
     </script>
 </body>
+
 </html>
